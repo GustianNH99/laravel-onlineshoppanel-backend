@@ -51,9 +51,22 @@ class ProductController extends Controller
     {
         $product = \App\Models\Product::findOrFail($id);
         //if image is not empty, then update the image
-        if ($request->image) {
+        //if ($request->hasFile('image')) {
+            // Generate filename
+            //$filename = time() . '.' . $request->file('image')->getClientOriginalExtension();
+
+            // Store file in storage/app/public/products/
+            //$request->file('image')->storeAs('public/products', $filename);
+
+            // Assign filename to product image attribute
+            //$product->image = $filename;
+
+            // Save the product model
+            //$product->save();
+        //}
+        if ($request->hasFile('image')) {
             $filename = time() . '.' . $request->image->extension();
-            $request->image->storeAs('public/products', $filename);
+            $request->image->storeAs('storage/app/public/products', $filename);
             $product->image = $filename;
         }
         $product->update($request->all());
