@@ -60,12 +60,12 @@ class OrderController extends Controller
         $token = $user->fcm_id;
 
         // Kirim notifikasi ke perangkat Android
-        //$messaging = app('firebase.messaging');
-        //$notification = Notification::create('Paket Dikirim', $message);
+        $messaging = app('firebase.messaging');
+        $notification = Notification::create('Paket Dikirim', $message);
 
-        //$message = CloudMessage::withTarget('token', $token)
-            //->withNotification($notification);
+        $message = CloudMessage::withTarget('token', $token)
+            ->withNotification($notification);
 
-        //$messaging->send($message);
+        $messaging->send($message);
     }
 }
